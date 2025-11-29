@@ -1,6 +1,6 @@
 import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 // Animations
 const fadeInUp = keyframes`
@@ -11,30 +11,6 @@ const fadeInUp = keyframes`
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-`;
-
-const glow = keyframes`
-  0% {
-    box-shadow: 0 0 5px rgba(23, 92, 230, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(23, 92, 230, 0.5);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(23, 92, 230, 0.3);
-  }
-`;
-
-const pulse = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
   }
 `;
 
@@ -118,31 +94,6 @@ const Degree = styled.div`
   
   @media only screen and (max-width: 768px) {
     font-size: 15px;
-  }
-`;
-
-const Date = styled.div`
-  font-size: 14px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.primary};
-  padding: 6px 14px;
-  background: linear-gradient(135deg, ${({ theme }) => theme.primary + '20'}, ${({ theme }) => theme.primary + '10'});
-  border-radius: 20px;
-  width: fit-content;
-  border: 1.5px solid ${({ theme }) => theme.primary + '40'};
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  
-  &::before {
-    content: '📅';
-    font-size: 12px;
-  }
-  
-  @media only screen and (max-width: 768px) {
-    font-size: 12px;
-    padding: 4px 10px;
   }
 `;
 
