@@ -6,12 +6,13 @@ import ProjectCard from "../cards/ProjectCard";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-contnet: center;
-  margin-top: 50px;
-  padding: 0px 16px;
-  position: rlative;
+  justify-content: center;
+  margin-top: 80px;
+  padding: 80px 16px;
+  position: relative;
   z-index: 1;
   align-items: center;
+  background: ${({ theme }) => theme.bg};
 `;
 
 const Wrapper = styled.div`
@@ -21,28 +22,35 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1100px;
-  gap: 12px;
+  max-width: 1350px;
+  gap: 20px;
   @media (max-width: 960px) {
     flex-direction: column;
   }
 `;
 const Title = styled.div`
-  font-size: 52px;
+  font-size: 56px;
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 20px;
-  color: ${({ theme }) => theme.text_primary};
+  background: linear-gradient(135deg, ${({ theme }) => theme.text_primary}, ${({ theme }) => theme.primary});
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
   @media (max-width: 768px) {
     margin-top: 12px;
-    font-size: 32px;
+    font-size: 36px;
   }
 `;
 const Desc = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
-  font-weight: 600;
+  font-weight: 500;
   color: ${({ theme }) => theme.text_secondary};
+  max-width: 700px;
+  line-height: 1.6;
+  margin-bottom: 20px;
   @media (max-width: 768px) {
     font-size: 16px;
   }
@@ -50,58 +58,98 @@ const Desc = styled.div`
 
 const ToggleButtonGroup = styled.div`
   display: flex;
-  border: 1.5px solid ${({ theme }) => theme.primary};
+  border: 2px solid ${({ theme }) => theme.primary + '40'};
   color: ${({ theme }) => theme.primary};
   font-size: 16px;
-  border-radius: 12px;
-font-weight 500;
-margin: 22px 0;
-@media (max-width: 768px){
-    font-size: 12px;
-}
+  border-radius: 16px;
+  font-weight: 600;
+  margin: 32px 0;
+  padding: 4px;
+  background: ${({ theme }) => theme.card + '80'};
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    font-size: 11px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 const ToggleButton = styled.div`
-  padding: 8px 18px;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: 12px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
   &:hover {
-    background: ${({ theme }) => theme.primary + 20};
+    background: ${({ theme }) => theme.primary + '15'};
+    transform: translateY(-2px);
   }
   @media (max-width: 768px) {
-    padding: 6px 8px;
-    border-radius: 4px;
+    padding: 8px 12px;
+    border-radius: 8px;
   }
   ${({ active, theme }) =>
     active &&
     `
-  background:  ${theme.primary + 20};
+    background: linear-gradient(135deg, ${theme.primary}, ${theme.secondary});
+    color: white;
+    box-shadow: 0 4px 15px ${theme.primary + '40'};
+    transform: translateY(-2px);
   `}
 `;
 const Divider = styled.div`
-  width: 1.5px;
-  background: ${({ theme }) => theme.primary};
+  width: 1px;
+  background: ${({ theme }) => theme.primary + '30'};
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const CardContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 32px;
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px 0;
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 10px;
+  }
+`;
+
+const ProjectCount = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text_secondary};
+  margin-top: -10px;
+  padding: 8px 16px;
+  background: ${({ theme }) => theme.primary + '15'};
+  border-radius: 20px;
+  border: 1px solid ${({ theme }) => theme.primary + '30'};
+  display: inline-block;
 `;
 
 const Projects = () => {
   const [toggle, setToggle] = useState("all");
+  
+  const filteredProjects = toggle === "all" 
+    ? projects 
+    : projects.filter((item) => item.category === toggle);
+  
   return (
     <Container id="Projects">
       <Wrapper>
         <Title>Projects</Title>
-        <Desc
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          I have worked on these projects. From web apps and web sites. Here are some of my projects.
+        <Desc>
+          Explore my portfolio of innovative projects ranging from full-stack web applications to interactive websites. Each project showcases my expertise in modern technologies and problem-solving abilities.
         </Desc>
 
         <ToggleButtonGroup>
@@ -117,7 +165,7 @@ const Projects = () => {
             active={toggle === "web app"}
             onClick={() => setToggle("web app")}
           >
-            WEB APP"S
+            WEB APPS
           </ToggleButton>
           <Divider />
 
@@ -125,7 +173,7 @@ const Projects = () => {
             active={toggle === "web sites"}
             onClick={() => setToggle("web sites")}
           >
-            web sites
+            WEBSITES
           </ToggleButton>
           <Divider />
 
@@ -133,7 +181,7 @@ const Projects = () => {
             active={toggle === "Portfolio web"}
             onClick={() => setToggle("Portfolio web")}
           >
-            Portfolio web
+            PORTFOLIO
           </ToggleButton>
           <Divider />
 
@@ -145,16 +193,14 @@ const Projects = () => {
           </ToggleButton>
         </ToggleButtonGroup>
         
-        
+        <ProjectCount>
+          {filteredProjects.length} {filteredProjects.length === 1 ? 'Project' : 'Projects'} Found
+        </ProjectCount>
 
         <CardContainer>
-          {toggle === "all" &&
-            projects.map((project) => <ProjectCard project={project} />)}
-          {projects
-            .filter((item) => item.category === toggle)
-            .map((project) => (
-              <ProjectCard project={project} />
-            ))}
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
+          ))}
         </CardContainer>
       </Wrapper>
     </Container>

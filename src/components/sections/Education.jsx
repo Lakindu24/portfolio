@@ -9,10 +9,18 @@ import EarthCanvas from "../canvas/Earth";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-contnet: center;
-  position: rlative;
+  justify-content: center;
+  position: relative;
   z-index: 1;
   align-items: center;
+  padding: 80px 0;
+  margin-top: 50px;
+  background: ${({ theme }) => theme.bg};
+  
+  @media (max-width: 768px) {
+    padding: 60px 0;
+    margin-top: 30px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -22,30 +30,57 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 1100px;
-  gap: 12px;
+  max-width: 1350px;
+  gap: 20px;
+  padding: 0 16px;
+  
   @media (max-width: 960px) {
     flex-direction: column;
   }
 `;
 const Title = styled.div`
-  font-size: 52px;
+  font-size: 56px;
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 20px;
-  color: ${({ theme }) => theme.text_primary};
+  background: linear-gradient(135deg, ${({ theme }) => theme.text_primary}, ${({ theme }) => theme.primary});
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, ${({ theme }) => theme.primary}, transparent);
+    border-radius: 2px;
+  }
+  
   @media (max-width: 768px) {
     margin-top: 12px;
-    font-size: 32px;
+    font-size: 36px;
   }
 `;
 const Desc = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
-  font-weight: 600;
+  font-weight: 500;
   color: ${({ theme }) => theme.text_secondary};
+  max-width: 700px;
+  line-height: 1.6;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  
   @media (max-width: 768px) {
     font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
 `;
 
@@ -54,13 +89,8 @@ const Education = () => {
     <Container id="Education">
       <Wrapper>
         <Title>Education</Title>
-        <Desc
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          My education has been a journey of self-discovery and growth. My
-          educational details are as follows.
+        <Desc>
+          My educational journey reflects continuous growth, dedication, and a passion for learning. Here's a timeline of my academic achievements and milestones.
         </Desc>
 
         <VerticalTimeline>
