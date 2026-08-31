@@ -2,6 +2,7 @@
   "name": "3d-portfolio-website",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lakindu24.github.io/portfolio/",
   "dependencies": {
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",

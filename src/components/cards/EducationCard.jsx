@@ -199,13 +199,17 @@ const AnimatedContent = styled.div`
       ${({ theme }) => theme.secondary}, 
       ${({ theme }) => theme.primary});
     background-size: 200% 100%;
-    animation: ${shimmer} 3s infinite linear;
+    /* Avoid an always-running animation on every timeline item. */
   }
 
   &:hover {
     transform: translateY(-8px) scale(1.01);
     box-shadow: 0 20px 60px rgba(23, 92, 230, 0.35);
     border: 1px solid rgba(23, 92, 230, 0.4);
+
+    &::before {
+      animation: ${shimmer} 3s infinite linear;
+    }
   }
   
   @media only screen and (max-width: 768px) {

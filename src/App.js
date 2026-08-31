@@ -5,15 +5,20 @@ import { BrowserRouter } from "react-router-dom";
 import Hero from "./components/sections/Hero";
 import Skills from "./components/sections/Skills";
 import Education from "./components/sections/Education";
-import StartCanvas from "./components/canvas/Stars";
 import Projects from "./components/sections/Projects";
 import Footer from "./components/sections/Footer";
+import StarsCanvas from "./components/canvas/Stars";
 
 const Body = styled.div`
   background-color: ${({ theme }) => theme.bg};
   width: 100%;
   overflow-x: hidden;
   position: relative;
+`;
+
+const Content = styled.div`
+  position: relative;
+  z-index: 1;
 `;
 
 const Wrapper = styled.div`
@@ -38,8 +43,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Body>
-          <StartCanvas />
-          <div>
+          <StarsCanvas />
+          <Content>
             <Hero />
             <Wrapper>
               <Skills />
@@ -50,7 +55,7 @@ function App() {
               <Education />
             </Wrapper>
             <Footer />
-          </div>
+          </Content>
         </Body>
       </BrowserRouter>
     </ThemeProvider>

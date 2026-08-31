@@ -90,7 +90,7 @@ const Card = styled.div`
       ${({ theme }) => theme.secondary}, 
       ${({ theme }) => theme.primary});
     background-size: 200% 100%;
-    animation: ${shimmer} 3s infinite linear;
+    /* Keep the highlight still until the card is intentionally interacted with. */
   }
 
   &:hover {
@@ -106,6 +106,10 @@ const Card = styled.div`
     
     ${Image} {
       transform: scale(1.1);
+    }
+
+    &::before {
+      animation: ${shimmer} 3s infinite linear;
     }
   }
   
@@ -319,15 +323,17 @@ const Stat = styled.div`
   ${props => props.issues && `&::before { content: "🐛"; }`}
 `;
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, onPreview }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <Card>
+    <Card onMouseEnter={() => onPreview?.(project)} onFocus={() => onPreview?.(project)}>
       <ImageContainer>
         <Image 
           src={project.image} 
           alt={project.title}
+          loading="lazy"
+          decoding="async"
           onLoad={() => setImageLoaded(true)}
           style={{ 
             opacity: imageLoaded ? 1 : 0,
@@ -363,6 +369,8 @@ const ProjectCard = ({ project }) => {
               key={index} 
               src={member.img} 
               alt={member.name}
+              loading="lazy"
+              decoding="async"
               title={member.name}
             />
           ))}
